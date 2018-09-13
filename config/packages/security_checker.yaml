@@ -1,3 +1,4 @@
+# Utility will be run automatically whenever you install or update any dependency in the application. If a dependency contains a vulnerability, you'll see a clear message.
 services:
     SensioLabs\Security\SecurityChecker:
         public: false

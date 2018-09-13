@@ -1,0 +1,15 @@
+{% extends 'base.html.twig'%}
+
+{# Override base title #}
+{% block title %} {{ name}} {% endblock %}
+
+{# Override base body #}
+{% block body %}
+<h1>{{ name }}</h1>
+
+<div>
+    <p>
+        Charity info
+    </p>
+</div>
+{% endblock %}
