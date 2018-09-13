@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-//route annotation, instead of using routes.yaml
+//Add Sensio bundles to be able to use route and method annotations
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -12,17 +13,19 @@ class CharityController extends AbstractController
 {
     /**
      * @Route("/")
+     * @Method({"GET"})
      */
     public function homepage()
     {
-        return new Response('TODO');
+        return $this->render('charity/homepage.html.twig');
     }
 
     /**
-     * @Route("/charities/{slug}")
+     * @Route("/{slug}", name="charity_show")
      */
     public function show($slug)
-    {   // $slug will equal the dynamic part of the URL
+    {   
+        // $slug will equal the dynamic part of the URL
         return $this->render('charity/show.html.twig', [
             'name' => ucwords(str_replace('-', ' ', $slug))
         ]);
