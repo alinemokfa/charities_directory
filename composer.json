@@ -13,7 +13,7 @@
         "symfony/form": "*",
         "symfony/framework-bundle": "*",
         "symfony/monolog-bundle": "^3.1",
-        "symfony/orm-pack": "*",
+        "symfony/orm-pack": "^1.0",
         "symfony/process": "*",
         "symfony/security-bundle": "*",
         "symfony/serializer-pack": "*",
@@ -28,7 +28,7 @@
         "sensiolabs/security-checker": "^4.1",
         "symfony/debug-pack": "^1.0",
         "symfony/dotenv": "*",
-        "symfony/maker-bundle": "^1.0",
+        "symfony/maker-bundle": "^1.7",
         "symfony/profiler-pack": "^1.0",
         "symfony/test-pack": "*"
     },
