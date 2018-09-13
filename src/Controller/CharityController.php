@@ -15,9 +15,9 @@ class CharityController extends AbstractController
      * @Route("/")
      * @Method({"GET"})
      */
-    public function homepage()
+    public function index()
     {
-        return $this->render('charity/homepage.html.twig');
+        return $this->render('charity/index.html.twig');
     }
 
     /**
