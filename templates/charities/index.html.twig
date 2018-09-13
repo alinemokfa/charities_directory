@@ -1,0 +1,27 @@
+{% extends 'base.html.twig'%}
+
+{# Override base body #}
+{% block body %}
+	{% if charities %}
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Charity Name</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for charity in charities %}
+					<tr>
+						<td>{{ charity }}</td>
+						<td>
+							<a href="{{ path('charity_show', { slug: 'TODO' }) }}" class="btn btn-dark">Show</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<p>No charities to display</p>
+	{% endif %}
+{% endblock %}

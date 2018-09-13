@@ -16,8 +16,12 @@ class CharityController extends AbstractController
      * @Method({"GET"})
      */
     public function index()
-    {
-        return $this->render('charity/index.html.twig');
+    {   
+        $charities= ['Charity1', 'Charity2'];
+
+        return $this->render('charities/index.html.twig', [
+            'charities' => $charities
+        ]);
     }
 
     /**
@@ -26,7 +30,7 @@ class CharityController extends AbstractController
     public function show($slug)
     {   
         // $slug will equal the dynamic part of the URL
-        return $this->render('charity/show.html.twig', [
+        return $this->render('charities/show.html.twig', [
             'name' => ucwords(str_replace('-', ' ', $slug))
         ]);
     }
