@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -37,14 +38,30 @@ class CharityController extends AbstractController
     public function new(Request $request)
     {
         $charity = new Charity();
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
 
         $form = $this->createFormBuilder($charity)
             ->add('name', TextType::class, ['attr' => ['class' => 'form-control']])
+            ->add('category', ChoiceType::class, ['choices' => [ $categories ], 'attr' => ['class' => 'form-control']])
             ->add('description', TextareaType::class, ['attr' => ['class' => 'form-control']])
             ->add('address', TextType::class, ['attr' => ['class' => 'form-control']])
             ->add('save', SubmitType::class, ['label' => 'Create', 'attr' => ['class' => 'btn btn-primary mt-3']])
             ->getForm();
         
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $charity = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($charity);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('charity_list');
+
+        }
+
         return $this->render('charities/new.html.twig', [
             'form' => $form->createView()
         ]);
