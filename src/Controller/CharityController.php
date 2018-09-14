@@ -42,6 +42,7 @@ class CharityController extends AbstractController
 
         $form = $this->createFormBuilder($charity)
             ->add('name', TextType::class, ['attr' => ['class' => 'form-control']])
+            //TODO - Render category name
             ->add('category', ChoiceType::class, ['choices' => [ $categories ], 'attr' => ['class' => 'form-control']])
             ->add('description', TextareaType::class, ['attr' => ['class' => 'form-control']])
             ->add('address', TextType::class, ['attr' => ['class' => 'form-control']])
@@ -79,6 +80,23 @@ class CharityController extends AbstractController
         return $this->render('charities/show.html.twig', [
             'charity' => $charity
         ]);
+    }
+
+    /**
+     * @Route("/charity/delete/{id}")
+     * @Method({"DELETE"})
+     */
+    public function delete(Request $request, $id)
+    {
+        $charity = $this->getDoctrine()->getRepository(Charity::class)->find($id);
+
+        $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($charity);
+            $entityManager->flush();
+        
+            //js fetch expects a response
+        $response = new Response();
+        $response->send();
     }
 
     //THIS IS NOT TO BE USED as GET requests should not be able to update data on the server, FOR REFERENCE ONLY

@@ -3,7 +3,7 @@
 {# Override base body #}
 {% block body %}
 	{% if charities %}
-		<table class="table table-striped">
+		<table id="charities" class="table table-striped">
 			<thead>
 				<tr>
 					<th>Charity Name</th>
@@ -16,6 +16,7 @@
 						<td>{{ charity.name }}</td>
 						<td>
 							<a href="/charity/{{ charity.id }}" class="btn btn-dark">Show</a>
+							<a href="#" class="btn btn-danger delete-charity" data-id="{{ charity.id }}">Delete</a>
 						</td>
 					</tr>
 				{% endfor %}
@@ -24,4 +25,8 @@
 	{% else %}
 		<p>No charities to display</p>
 	{% endif %}
+{% endblock %}
+
+{% block javascripts %}
+	<script src="/js/main.js"></script>
 {% endblock %}
