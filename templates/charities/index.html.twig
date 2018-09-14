@@ -1,4 +1,4 @@
-{% extends 'base.html.twig'%}
+{% extends 'base.html.twig' %}
 
 {# Override base body #}
 {% block body %}
@@ -13,9 +13,9 @@
 			<tbody>
 				{% for charity in charities %}
 					<tr>
-						<td>{{ charity }}</td>
+						<td>{{ charity.name }}</td>
 						<td>
-							<a href="{{ path('charity_show', { slug: 'TODO' }) }}" class="btn btn-dark">Show</a>
+							<a href="/charity/{{ charity.id }}" class="btn btn-dark">Show</a>
 						</td>
 					</tr>
 				{% endfor %}
