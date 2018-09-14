@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{# Override base title #}
+{% block title %}Edit Charity{% endblock %}
+
+{# Override base body #}
+{% block body %}
+    <h1>New Charity</h1>
+    <hr>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

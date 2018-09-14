@@ -68,7 +68,43 @@ class CharityController extends AbstractController
         ]);
     }
 
-    //Orther matters so show() needs to come after new()
+    /**
+     * @Route("/charity/edit/{id}", name="edit_charity")
+     * @Method({"GET", "POST"})
+     */
+    public function edit(Request $request, $id)
+    {
+        $charity = new Charity();
+        $charity = $this->getDoctrine()->getRepository(Charity::class)->find($id);
+
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+
+        $form = $this->createFormBuilder($charity)
+            ->add('name', TextType::class, ['attr' => ['class' => 'form-control']])
+            //TODO - Render category name
+            ->add('category', ChoiceType::class, ['choices' => [ $categories ], 'attr' => ['class' => 'form-control']])
+            ->add('description', TextareaType::class, ['attr' => ['class' => 'form-control']])
+            ->add('address', TextType::class, ['attr' => ['class' => 'form-control']])
+            ->add('save', SubmitType::class, ['label' => 'Update', 'attr' => ['class' => 'btn btn-primary mt-3']])
+            ->getForm();
+        
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            return $this->redirectToRoute('charity_list');
+
+        }
+
+        return $this->render('charities/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    //Orther matters so show() needs to come after new() and update()
     /**
      * @Route("/charity/{id}", name="charity_show")
      */

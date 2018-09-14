@@ -15,7 +15,8 @@
 					<tr>
 						<td>{{ charity.name }}</td>
 						<td>
-							<a href="/charity/{{ charity.id }}" class="btn btn-dark">Show</a>
+							<a href="/charity/{{ charity.id }}" class="btn btn-primary">Show</a>
+							<a href="/charity/edit/{{ charity.id }}" class="btn btn-secondary">Edit</a>
 							<a href="#" class="btn btn-danger delete-charity" data-id="{{ charity.id }}">Delete</a>
 						</td>
 					</tr>
