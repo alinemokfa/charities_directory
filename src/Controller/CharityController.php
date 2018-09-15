@@ -159,27 +159,4 @@ class CharityController extends AbstractController
             'charities' => $charities
         ]);
     }
-
-    //THIS IS NOT TO BE USED as GET requests should not be able to update data on the server, FOR REFERENCE ONLY
-    // /**
-    //  * @Route("/charity/save")
-    //  */
-    // public function save()
-    // {
-    //     $entityManager = $this->getDoctrine()->getManager();
-
-    //     $charity = new Charity();
-    //     $category = new Category();
-    //     $category->setName('Environmental');
-    //     $charity->setCategory($category);
-    //     $charity->setName('The Greenpeace Environmental Trust');
-    //     $charity->setAddress('Greenpeace, Canonbury Villas, London N1 2PN, UK');
-    //     $charity->setDescription('The Greenpeace Environmental Trust is a registered charity (284934) and a company limited by guarantee (company number 1636817).
-    //     Founded in 1982 with the objective of “furthering public understanding of and promoting the protection of world ecology and the natural environment”.');
-    //     $entityManager->persist($category);
-    //     $entityManager->persist($charity);
-    //     $entityManager->flush();
-
-    //     return new Response('Charity has been saved');
-    // }
 }
