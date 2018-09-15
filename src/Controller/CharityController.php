@@ -83,7 +83,7 @@ class CharityController extends AbstractController
         $charity = $this->getDoctrine()->getRepository(Charity::class)->find($id);
 
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
-        dump($categories, $this);
+  
         $form = $this->createFormBuilder($charity)
             ->add('name', TextType::class, ['attr' => ['class' => 'form-control']])
             ->add('category', EntityType::class, [
