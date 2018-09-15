@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{# Override base body #}
+{% block body %}
+	<h1>All categories</h1>
+	{% if categories %}
+		<table id="categories" class="table table-striped">
+			<thead>
+				<tr>
+					<th>Category Name</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for category in categories %}
+					<tr>
+						<td>{{ category.name }}</td>
+						<td>
+							<a href="/category/edit/{{ category.id }}" class="btn btn-secondary">Edit</a>
+							<a href="#" class="btn btn-danger delete-category" data-id="{{ category.id }}">Delete</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<p>No categories to display</p>
+	{% endif %}
+{% endblock %}
+
+{% block javascripts %}
+	<script src="/js/main.js"></script>
+{% endblock %}

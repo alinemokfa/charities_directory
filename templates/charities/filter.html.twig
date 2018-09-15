@@ -2,26 +2,29 @@
 
 {# Override base body #}
 {% block body %}
-    <table id="charities" class="table table-striped">
-        <thead>
-            <tr>
-                <th>Charity Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for charity in charities %}
+    {% if charities %}
+        <table id="charities" class="table table-striped">
+            <thead>
                 <tr>
-                    <td>{{ charity.name }}</td>
-                    <td>
-                        <a href="/charity/{{ charity.id }}" class="btn btn-primary">Show</a>
-                        <a href="/charity/edit/{{ charity.id }}" class="btn btn-secondary">Edit</a>
-                        <a href="#" class="btn btn-danger delete-charity" data-id="{{ charity.id }}">Delete</a>
-                    </td>
+                    <th>Charity Name</th>
+                    <th>Actions</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+                {% for charity in charities %}
+                    <tr>
+                        <td>{{ charity.name }}</td>
+                        <td>
+                            <a href="/charity/{{ charity.id }}" class="btn btn-primary">Show</a>
+                            <a href="/charity/edit/{{ charity.id }}" class="btn btn-secondary">Edit</a>
+                            <a href="#" class="btn btn-danger delete-charity" data-id="{{ charity.id }}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No charities to display. Please choose another category.</p>
+	{% endif %}
 <a href="/" class="btn btn-primary">Back</a>
 {% endblock %}

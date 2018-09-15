@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{# Override base title #}
+{% block title %}New Category{% endblock %}
+
+{# Override base body #}
+{% block body %}
+    <h1>New Category</h1>
+    <hr>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}
