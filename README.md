@@ -4,7 +4,9 @@ Web based charities directory built using Symfony4.
 ## Prerequisites
 
 Symfony 4.1.4
+
 PHP 7.1.16
+
 Composer version 1.8-dev
 
 ## To download and run:
