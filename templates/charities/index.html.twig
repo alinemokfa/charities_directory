@@ -2,6 +2,33 @@
 
 {# Override base body #}
 {% block body %}
+	<h1>Filter by category</h1>
+	{# Tried adding dropdown menu but more research is needed to get the page to reload when option is selected #}
+	{% if categories %}
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Category Name</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for category in categories %}
+					<tr>
+						<td>{{ category.name }}</td>
+						<td>
+							<a href="/charities/{{ category.id }}" class="btn btn-primary">Select</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<p>No categories to display</p>
+	{% endif %}
+
+		<hr>
+	<h1>All charities</h1>
 	{% if charities %}
 		<table id="charities" class="table table-striped">
 			<thead>

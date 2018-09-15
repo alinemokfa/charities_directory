@@ -26,9 +26,11 @@ class CharityController extends AbstractController
     public function index()
     {   
         $charities = $this->getDoctrine()->getRepository(Charity::class)->findAll();
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
 
         return $this->render('charities/index.html.twig', [
-            'charities' => $charities
+            'charities' => $charities,
+            'categories' => $categories
         ]);
     }
 
@@ -142,6 +144,20 @@ class CharityController extends AbstractController
             //js fetch expects a response
         $response = new Response();
         $response->send();
+    }
+
+    /**
+     * @Route("/charities/{catId}")
+     * @Method({"GET"})
+     */
+    public function filter($catId)
+    {   
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($catId);
+        $charities = $this->getDoctrine()->getRepository(Charity::class)->findByCategory($category);
+        
+        return $this->render('charities/filter.html.twig', [
+            'charities' => $charities
+        ]);
     }
 
     //THIS IS NOT TO BE USED as GET requests should not be able to update data on the server, FOR REFERENCE ONLY

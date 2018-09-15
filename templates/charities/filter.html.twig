@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{# Override base body #}
+{% block body %}
+    <table id="charities" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Charity Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for charity in charities %}
+                <tr>
+                    <td>{{ charity.name }}</td>
+                    <td>
+                        <a href="/charity/{{ charity.id }}" class="btn btn-primary">Show</a>
+                        <a href="/charity/edit/{{ charity.id }}" class="btn btn-secondary">Edit</a>
+                        <a href="#" class="btn btn-danger delete-charity" data-id="{{ charity.id }}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
