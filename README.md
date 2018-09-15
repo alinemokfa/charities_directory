@@ -18,6 +18,8 @@ In a terminal window, type:
 
     composer install
 
-    ./bin/console server:run
+    php bin/console doctrine:fixtures:load
+
+    php bin/console server:run
 
 Now please visit `http://localhost:8000` in your browser.
