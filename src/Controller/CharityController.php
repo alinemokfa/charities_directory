@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 // AbstractController gives access to shortcut methods such as render()
 class CharityController extends AbstractController
@@ -42,8 +43,12 @@ class CharityController extends AbstractController
 
         $form = $this->createFormBuilder($charity)
             ->add('name', TextType::class, ['attr' => ['class' => 'form-control']])
-            //TODO - Render category name
-            ->add('category', ChoiceType::class, ['choices' => [ $categories ], 'attr' => ['class' => 'form-control']])
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => function ($category) {
+                    return $category->getName();
+                }
+            ])
             ->add('description', TextareaType::class, ['attr' => ['class' => 'form-control']])
             ->add('address', TextType::class, ['attr' => ['class' => 'form-control']])
             ->add('save', SubmitType::class, ['label' => 'Create', 'attr' => ['class' => 'btn btn-primary mt-3']])
@@ -78,11 +83,15 @@ class CharityController extends AbstractController
         $charity = $this->getDoctrine()->getRepository(Charity::class)->find($id);
 
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
-
+        dump($categories, $this);
         $form = $this->createFormBuilder($charity)
             ->add('name', TextType::class, ['attr' => ['class' => 'form-control']])
-            //TODO - Render category name
-            ->add('category', ChoiceType::class, ['choices' => [ $categories ], 'attr' => ['class' => 'form-control']])
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => function ($category) {
+                    return $category->getName();
+                }
+            ])
             ->add('description', TextareaType::class, ['attr' => ['class' => 'form-control']])
             ->add('address', TextType::class, ['attr' => ['class' => 'form-control']])
             ->add('save', SubmitType::class, ['label' => 'Update', 'attr' => ['class' => 'btn btn-primary mt-3']])
@@ -104,7 +113,7 @@ class CharityController extends AbstractController
         ]);
     }
 
-    //Orther matters so show() needs to come after new() and update()
+    //Order matters so show() needs to come after new() and update()
     /**
      * @Route("/charity/{id}", name="charity_show")
      */
