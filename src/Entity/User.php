@@ -3,14 +3,13 @@
 namespace App\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\EquatableInterface;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface, EquatableInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -85,4 +84,26 @@ class User implements UserInterface, EquatableInterface
     public function getSalt(){}
     
     public function eraseCredentials(){}
+
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->username,
+            $this->email,
+            $this->password    
+        ]);
+    }
+
+    public function unserialize($string)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->email,
+            $this->password 
+        ) = unserialize($string, [
+            'allowed_classes' => false
+        ]);
+    }
 }
