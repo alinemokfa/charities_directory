@@ -3,9 +3,12 @@
 {% block title %}Hello!{% endblock %}
 
 {% block body %}
-<h1>Please sign in:</h1>
-<hr>
 <div>
+    <h1>Please sign in:</h1>
+    <hr>
+    {% if error %}
+        <span class="text-danger">{{ error.messageKey }}</span>
+    {% endif %}
     <form action="{{ path('login') }}" method="POST">
         Username: <input class="form-control" type="text" name="_username" value="{{ last_username }}"><br> 
         Password: <input class="form-control" type="password" name="_password"><br>
