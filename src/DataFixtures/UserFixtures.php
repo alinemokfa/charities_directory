@@ -23,6 +23,7 @@ class UserFixtures extends Fixture
         $admin->setPassword(
             $this->encoder->encodePassword($admin, '0000')
         );
+        $admin->setRoles(array('ROLE_ADMIN'));
         $admin->setEmail('admin@charities.test');
         $manager->persist($admin);
 
@@ -31,6 +32,7 @@ class UserFixtures extends Fixture
         $user->setPassword(
             $this->encoder->encodePassword($user, '0000')
         );
+        $user->setRoles(array('ROLE_USER'));
         $user->setEmail('user@charities.test');
         $manager->persist($user);
 
