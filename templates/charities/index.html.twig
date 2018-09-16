@@ -2,58 +2,66 @@
 
 {# Override base body #}
 {% block body %}
-	<h1>Filter by category</h1>
-	{# Tried adding dropdown menu but more research is needed to get the page to reload when option is selected #}
-	{% if categories %}
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Category Name</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for category in categories %}
-					<tr>
-						<td>{{ category.name }}</td>
-						<td>
-							<a href="/charities/{{ category.id }}" class="btn btn-primary">Select</a>
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+	{% if not app.user %}
+		<div class="jumbotron text-center ">
+			<h1> Please <a href="/login">sign in</a>.</h1>
+		</div>
 	{% else %}
-		<p>No categories to display.</p>
-	{% endif %}
-
-	<hr>
-
-	<h1>All charities</h1>
-	{% if charities %}
-		<table id="charities" class="table table-striped">
-			<thead>
-				<tr>
-					<th>Charity Name</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for charity in charities %}
+		<h1>Filter by category</h1>
+		{# Tried adding dropdown menu but more research is needed to get the page to reload when option is selected #}
+		{% if categories %}
+			<table id="categories" class="table table-striped">
+				<thead>
 					<tr>
-						<td>{{ charity.name }}</td>
-						<td>
-							<a href="/charity/{{ charity.id }}" class="btn btn-primary">Show</a>
-							<a href="/charity/edit/{{ charity.id }}" class="btn btn-secondary">Edit</a>
-							<a href="#" class="btn btn-danger delete-charity" data-id="{{ charity.id }}">Delete</a>
-						</td>
+						<th>Category Name</th>
+						<th>Actions</th>
 					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	{% else %}
-		<p>No charities to display.</p>
-	{% endif %}
+				</thead>
+				<tbody>
+					{% for category in categories %}
+						<tr>
+							<td>{{ category.name }}</td>
+							<td>
+								<a href="/charities/{{ category.id }}" class="btn btn-primary">Select</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<p>No categories to display.</p>
+		{% endif %}
+
+		<hr>
+
+		<h1>All charities</h1>
+		{% if charities %}
+			<table id="charities" class="table table-striped">
+				<thead>
+					<tr>
+						<th>Charity Name</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for charity in charities %}
+						<tr>
+							<td>{{ charity.name }}</td>
+							<td>
+								<a href="/charity/{{ charity.id }}" class="btn btn-primary">Show</a>
+								{% if is_granted('ROLE_ADMIN') %}
+									<a href="/charity/edit/{{ charity.id }}" class="btn btn-secondary">Edit</a>
+									<a href="#" class="btn btn-danger delete-charity" data-id="{{ charity.id }}">Delete</a>
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<p>No charities to display.</p>
+		{% endif %}
+	{% endif %}	
 {% endblock %}
 
 {% block javascripts %}
