@@ -27,4 +27,4 @@ Now please visit `http://localhost:8000` in your browser.
 ## To run tests:
 In a terminal window, type:
 
-php bin/phpunit
+   php bin/phpunit
