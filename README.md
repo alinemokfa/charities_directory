@@ -24,14 +24,14 @@ In a terminal window, type:
 
 Now please visit `http://localhost:8000` in your browser.
 
-To sign in as an admin: 
+### To sign in as an admin: 
 
 username: admin
 
 password: 0000
 
 
-To sign in as a user:
+### To sign in as a user:
 
 username: user
 
